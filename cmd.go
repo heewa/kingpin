@@ -17,7 +17,9 @@ func (c *cmdMixin) CmdCompletion() []string {
 
 	// If this command has subcommands, we should show these to the user.
 	for _, option := range c.cmdGroup.commandOrder {
-		rv = append(rv, option.name)
+		if !option.hidden {
+			rv = append(rv, option.name)
+		}
 	}
 
 	// Add any completions from args as well
